@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  ProductUpdateTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: product-updates-topic
+
+  ProductUpdateQueueSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref ProductUpdateTopic
+      Protocol: sqs
+      Endpoint: !GetAtt ProductUpdateQueue.Arn
